@@ -1,0 +1,2 @@
+export const GET_BILLBOARDS = 'GET_BILLBOARDS'
+export const SET_BILLBOARDS = 'SET_BILLBOARDS'
