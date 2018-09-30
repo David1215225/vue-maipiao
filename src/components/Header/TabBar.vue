@@ -20,6 +20,19 @@ export default {
       title: '卖座电影',
       addr: '北京'
     }
+  },
+  created () {
+    this.$router.beforeEach((to, from, next) => {
+      switch (to.name) {
+        case 'home':
+          this.title = '卖座电影'; break
+        case 'films':
+          this.title = '全部影片'; break
+        case 'detail':
+          this.title = '影片详情'; break
+      }
+      next()
+    })
   }
 }
 </script>
@@ -36,10 +49,10 @@ export default {
     display: flex;
     justify-content: space-between;
     z-index: 9;
-    .tabBar-left{
+    .tabBar-left {
       display: flex;
       justify-content: left;
-      .nav-btn{
+      .nav-btn {
         height: 100%;
         width: .48rem;
         border-right: 1px solid #222222;
@@ -48,25 +61,25 @@ export default {
         color: #999999;
         align-items: center;
       }
-      .nav-title{
+      .nav-title {
         margin-left: .05rem;
         line-height: .5rem;
         font-size: .14rem;
         color: #ffffff;
       }
     }
-    .tabBar-right{
+    .tabBar-right {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-right: .2rem;
       color: #999999;
       font-size: .14rem;
-      .address{
+      .address {
         margin-right: .2rem;
         display: flex;
         align-items: center;
-        span{
+        span {
           margin-right: .02rem;
         }
       }

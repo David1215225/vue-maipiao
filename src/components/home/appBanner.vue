@@ -1,9 +1,11 @@
 <template>
-  <section class="swiper-container">
+  <section class="swiper-container" v-if="isBanner">
     <div class="swiper-container app-home-banner">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="billboard in billboards" :key="billboard.id">
-          <img :src="billboard.imageUrl" width="100%" alt="" :title="billboard.name">
+          <router-link to="#">
+            <img :src="billboard.imageUrl" width="100%" alt="" :title="billboard.name">
+          </router-link>
         </div>
       </div>
     </div>
@@ -22,7 +24,8 @@ export default {
   },
   computed: {
     ...mapState({
-      'billboards': state => state.billboards
+      'billboards': state => state.billboards,
+      'isBanner': state => state.isBanner
     })
   },
   created () {

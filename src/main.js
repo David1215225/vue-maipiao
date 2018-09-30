@@ -11,17 +11,38 @@ import regular from '@fortawesome/fontawesome-free-regular'
 import brands from '@fortawesome/fontawesome-free-brands'
 import 'vue2-animate/dist/vue2-animate.min.css'
 import '../node_modules/swiper/dist/css/swiper.min.css'
+import './modules/filters'
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+import mintUI from 'mint-ui'
+import 'mint-ui/lib/style.min.css'
+Vue.use(mintUI)
+
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)
 fontawesome.library.add(brands)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
+Nprogress.configure({
+  easing: 'ease',
+  speed: 500,
+  showSpinner: false,
+  trickleSpeed: 200,
+  minimum: 0.3
+})
+router.beforeEach((to, from, next) => {
+  Nprogress.start()
+  next()
+})
+router.afterEach(() => {
+  Nprogress.done()
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

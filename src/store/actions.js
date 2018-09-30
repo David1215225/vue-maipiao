@@ -1,14 +1,19 @@
 import * as types from './const'
 import axios from 'axios'
 import config from '../modules'
+import state from './state'
 
 let actions = {
   [types.GET_BILLBOARDS] ({commit}) {
     axios.get(config.host + 'mz/v4/api/billboard/home', {
-      params: {_t: Date.now()}
+      params: {__t: Date.now()}
     }).then(res => {
-      console.log(res.data.data, '222222222')
-      commit(types.SET_BILLBOARDS, res.data.data.billboards)
+      if (res.data.status === 0) {
+        state.isBanner = true
+        commit(types.SET_BILLBOARDS, res.data.data.billboards)
+      } else {
+        state.isBanner = false
+      }
     })
   }
 }

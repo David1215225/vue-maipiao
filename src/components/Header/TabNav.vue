@@ -1,15 +1,18 @@
 <template>
   <div class="app-nav">
     <transition enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
-      <nav class="tabNav" v-show="isShow">
+      <nav class="tabNav" v-if="isShow">
         <ul>
-          <li v-for="column in columns" :key="column.id" @click="toggleNav"><a href="#">{{column.name}}<i class="fas fa-angle-right"></i></a>
+          <li v-for="column in columns" :key="column.id">
+            <router-link :to="column.path" @click.native="toggleNav">
+              {{column.name}}<i class="fas fa-angle-right"></i>
+            </router-link>
           </li>
         </ul>
       </nav>
     </transition>
     <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <div class="mark" v-show="isShow" @click="toggleNav"></div>
+      <div class="mark" v-if="isShow" @click="toggleNav"></div>
     </transition>
   </div>
 </template>
@@ -21,12 +24,12 @@ export default {
   data () {
     return {
       columns: [
-        {id: 1, name: '首页'},
-        {id: 2, name: '影片'},
-        {id: 3, name: '影院'},
-        {id: 4, name: '商城'},
-        {id: 5, name: '我的'},
-        {id: 6, name: '卖座卡'}
+        {id: 1, name: '首页', path: '/home'},
+        {id: 2, name: '影片', path: '/films'},
+        {id: 3, name: '影院', path: '/video'},
+        {id: 4, name: '商城', path: '/shop'},
+        {id: 5, name: '我的', path: '/mine'},
+        {id: 6, name: '卖座卡', path: '/card'}
       ]
     }
   }
@@ -36,7 +39,7 @@ export default {
 <style scoped lang="scss">
   .app-nav {
     .tabNav {
-      position: absolute;
+      position: fixed;
       top: .5rem;
       right: 1.1rem;
       left: 0;
@@ -72,7 +75,7 @@ export default {
       }
     }
     .mark{
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       z-index:2;

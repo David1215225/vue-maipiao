@@ -28,7 +28,6 @@ export default {
 <style scoped lang="scss">
   .container {
     width: 100%;
-    padding-top: .5rem;
     .film-list {
       margin-top: .2rem;
       padding: 0 .2rem;

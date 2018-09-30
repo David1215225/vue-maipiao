@@ -1,4 +1,5 @@
 let state = {
-  billboards: []
+  billboards: [],
+  isBanner: false
 }
 export default state
