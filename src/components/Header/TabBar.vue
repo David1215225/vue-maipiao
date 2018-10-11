@@ -22,15 +22,22 @@ export default {
     }
   },
   created () {
+    if (localStorage.path) {
+      this.title = localStorage.path
+    }
     this.$router.beforeEach((to, from, next) => {
       switch (to.name) {
         case 'home':
-          this.title = '卖座电影'; break
+          this.title = '卖座电影'
+          break
         case 'films':
-          this.title = '全部影片'; break
+          this.title = '全部影片'
+          break
         case 'detail':
-          this.title = '影片详情'; break
+          this.title = '影片详情'
+          break
       }
+      localStorage.setItem('path', this.title)
       next()
     })
   }
