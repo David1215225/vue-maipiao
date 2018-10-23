@@ -42,6 +42,6 @@ export default {
 
 <style scoped lang="scss">
   .swiper-container{
-    height: 2.4rem;
+    /*height: 2.4rem;*/
   }
 </style>

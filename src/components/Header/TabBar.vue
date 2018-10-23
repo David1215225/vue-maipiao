@@ -6,7 +6,7 @@
     </div>
     <div class="tabBar-right">
       <div class="address"><span>{{addr}}</span><i class="fas fa-angle-down"></i></div>
-      <div class="tabUser"><i class="fas fa-user"></i></div>
+      <div class="tabUser" @click="goToLogin()"><i class="fas fa-user"></i></div>
     </div>
   </div>
 </template>
@@ -22,8 +22,8 @@ export default {
     }
   },
   created () {
-    if (localStorage.path) {
-      this.title = localStorage.path
+    if (localStorage.title) {
+      this.title = localStorage.title
     }
     this.$router.beforeEach((to, from, next) => {
       switch (to.name) {
@@ -36,10 +36,21 @@ export default {
         case 'detail':
           this.title = '影片详情'
           break
+        case 'login':
+          this.title = '登陆'
+          break
+        case 'mine':
+          this.title = '我的'
+          break
       }
-      localStorage.setItem('path', this.title)
+      localStorage.setItem('title', this.title)
       next()
     })
+  },
+  methods: {
+    goToLogin () {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

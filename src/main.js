@@ -16,7 +16,9 @@ import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import mintUI from 'mint-ui'
 import 'mint-ui/lib/style.min.css'
+import autoFunction from './modules'
 Vue.use(mintUI)
+Vue.use(autoFunction)
 
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)
@@ -32,8 +34,16 @@ Nprogress.configure({
   minimum: 0.3
 })
 router.beforeEach((to, from, next) => {
-  Nprogress.start()
-  next()
+  if (to.matched.some(record => record.meta.requireAuth)) {
+    Nprogress.start()
+    next({
+      path: '/login',
+      query: {redirect: to.fullPath}
+    })
+  } else {
+    Nprogress.start()
+    next()
+  }
 })
 router.afterEach(() => {
   Nprogress.done()
